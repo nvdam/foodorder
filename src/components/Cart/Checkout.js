@@ -75,7 +75,7 @@ useEffect(() => {
              />
              {nameHasError && <p className={classes.errortext}> Enter Valid Name!!!</p>}
         </div>
-        <div className={classes.control}> 
+       <div className={classes.control}> 
             <label htmlFor="number"> Mobile Number: </label>
             <input 
             type="number"

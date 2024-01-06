@@ -15,6 +15,11 @@
 .button:hover,
 .button:active {
   background-color: #2c0d00;
+  animation: butt 3s infinite;
+}
+@keyframes butt {
+  from{background-color: red;color: white; border: none;}
+  to{background-color: yellow; color: black; box-shadow: 2px 2px 6px white;}
 }
 
 .icon {

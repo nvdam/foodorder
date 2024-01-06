@@ -46,6 +46,7 @@ const Cart = (props) => {
             body: JSON.stringify({
               user: userData,
               orderData: cartCtx.items,
+              total: totalAmount
               
             })
           });

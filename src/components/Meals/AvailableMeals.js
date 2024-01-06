@@ -1,7 +1,7 @@
-import Card from '../UI/Card';
-import MealItem from './MealItem/MealItem';
-import classes from './AvailableMeals.module.css';
-import { useEffect, useState } from 'react';
+import Card from "../UI/Card";
+import MealItem from "./MealItem/MealItem";
+import classes from "./AvailableMeals.module.css";
+import { useEffect, useState } from "react";
 
 // const DUMMY_MEALS = [
 //   {
@@ -31,52 +31,52 @@ import { useEffect, useState } from 'react';
 // ];
 
 const AvailableMeals = () => {
-const [ isLoading, setIsLoading] = useState(true);
-const [isHttpError, setIsHttpError] = useState();
-const [meals, setMeals] = useState([]);
-useEffect( () => {
-  const fetchMeals = async () =>{
-    const response = await fetch( 'https://naga-project-ff79f-default-rtdb.firebaseio.com/meals.json' );
-    const responseData = await response.json();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isHttpError, setIsHttpError] = useState();
+  const [meals, setMeals] = useState([]);
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const response = await fetch(
+        "https://naga-project-ff79f-default-rtdb.firebaseio.com/meals.json"
+      );
+      const responseData = await response.json();
 
-    if(!response.ok){
-      throw new Error("SomeThing Went Wrong!!!");
-    }
-    const loadedMeals = [];
+      if (!response.ok) {
+        throw new Error("SomeThing Went Wrong!!!");
+      }
+      const loadedMeals = [];
 
-    for(const key in responseData){
-      loadedMeals.push({
-        id: key,
-        name: responseData[key].name,
-        description: responseData[key].description,
-        price: responseData[key].price,
-      })
-    }
+      for (const key in responseData) {
+        loadedMeals.push({
+          id: key,
+          name: responseData[key].name,
+          description: responseData[key].description,
+          price: responseData[key].price,
+        });
+      }
       setMeals(loadedMeals);
       setIsLoading(false);
-  };
-  fetchMeals().catch((error) => {
-    setIsLoading(false);
-    setIsHttpError(error.message);
+    };
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setIsHttpError(error.message);
+    });
+  }, []);
 
-  });
-}, []);
-
-if(isLoading){
-  return(<section className={classes.loadingtext}>
-   <p > Please wait.....we are fetching ITEMS </p>
-   </section>
-  );
-}
-if(isHttpError){
-  return(<section className={classes.errortext}>
-   <p >{isHttpError} </p>
-   </section>
-  );
-}
-
-
-
+  if (isLoading) {
+    return (
+      <section className={classes.loadingtext}>
+        <p> Please wait.....we are fetching ITEMS </p>
+      </section>
+    );
+  }
+  if (isHttpError) {
+    return (
+      <section className={classes.errortext}>
+        <p>{isHttpError} </p>
+      </section>
+    );
+  }
 
   const mealsList = meals.map((meal) => (
     <MealItem
